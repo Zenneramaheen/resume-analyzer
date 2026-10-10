@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Analyzer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Resume Analyzer</h1>
+    <button id="logout-btn" class="hidden">Log out</button>
+  </header>
+
+  <main>
+    <!-- Auth view -->
+    <section id="auth-view" class="card">
+      <h2>Welcome</h2>
+      <div class="tabs">
+        <button id="tab-login" class="active">Log in</button>
+        <button id="tab-register">Register</button>
+      </div>
+      <form id="auth-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Password (min 8 chars)" required minlength="8" />
+        <button type="submit" id="auth-submit">Log in</button>
+      </form>
+      <p id="auth-error" class="error"></p>
+    </section>
+
+    <!-- App view -->
+    <section id="app-view" class="hidden">
+      <div class="card">
+        <h2>Analyze a resume</h2>
+        <form id="upload-form">
+          <input type="file" id="pdf-file" accept="application/pdf" required />
+          <input type="text" id="target-role" placeholder="Target role (e.g. software engineer)" value="software engineer" />
+          <button type="submit">Upload &amp; analyze</button>
+        </form>
+        <p id="upload-error" class="error"></p>
+      </div>
+
+      <div id="result-card" class="card hidden">
+        <h2>Result</h2>
+        <div class="score-row">
+          <div id="score-ring"><span id="score-num">–</span></div>
+          <p id="result-summary"></p>
+        </div>
+        <h3>Suggestions</h3>
+        <ul id="suggestions"></ul>
+        <div id="keywords" class="hidden">
+          <h3>Matched keywords</h3>
+          <div id="matched-kw" class="chips"></div>
+          <h3>Missing keywords</h3>
+          <div id="missing-kw" class="chips"></div>
+        </div>
+      </div>
+
+      <div id="ai-card" class="card hidden">
+        <h2 id="ai-title"></h2>
+        <div id="ai-body"></div>
+      </div>
+
+      <div class="card">
+        <h2>Your resumes</h2>
+        <ul id="resume-list"></ul>
+      </div>
+
+      <div class="card">
+        <h2>Match resume to a job</h2>
+        <form id="match-form">
+          <select id="match-resume"></select>
+          <select id="match-jd"></select>
+          <button type="submit">Run match</button>
+        </form>
+        <p id="match-error" class="error"></p>
+        <div class="ai-tools">
+          <input type="text" id="company-name" placeholder="Company name (for cover letter)" />
+          <div class="btn-row">
+            <button id="rewrite-btn" type="button">Rewrite bullets</button>
+            <button id="letter-btn" type="button">Cover letter</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Job descriptions</h2>
+        <form id="jd-form">
+          <input type="text" id="jd-title" placeholder="Job title (e.g. Backend Intern)" required />
+          <textarea id="jd-text" rows="5" placeholder="Paste the job description here…" required></textarea>
+          <button type="submit">Save job description</button>
+        </form>
+        <ul id="jd-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
